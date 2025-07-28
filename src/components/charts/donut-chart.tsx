@@ -10,13 +10,26 @@ import {
   Legend,
 } from "recharts";
 
+interface ChartDataItem {
+  [key: string]: string | number;
+}
+
 interface DonutChartProps {
   title: string;
-  data: any[];
+  data: ChartDataItem[];
   nameKey: string;
   dataKey: string;
   colors?: string[];
   height?: number;
+}
+
+interface CustomizedLabelProps {
+  cx?: number;
+  cy?: number;
+  midAngle?: number;
+  innerRadius?: number;
+  outerRadius?: number;
+  percent?: number;
 }
 
 const DEFAULT_COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#0088fe"];
@@ -36,7 +49,10 @@ export function DonutChart({
     innerRadius,
     outerRadius,
     percent,
-  }: any) => {
+  }: CustomizedLabelProps) => {
+    if (cx === undefined || cy === undefined || midAngle === undefined || innerRadius === undefined || outerRadius === undefined || percent === undefined) {
+      return null;
+    }
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * (Math.PI / 180));
     const y = cy + radius * Math.sin(-midAngle * (Math.PI / 180));

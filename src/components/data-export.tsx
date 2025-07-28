@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { RiDownload2Line, RiFileExcel2Line, RiFilePdf2Line } from "react-icons/ri";
 
-interface DataExportProps<T> {
+interface DataExportProps<T extends Record<string, unknown>> {
   data: T[];
   columns: {
     header: string;
@@ -18,7 +18,7 @@ interface DataExportProps<T> {
   filename: string;
 }
 
-export function DataExport<T>({ data, columns, filename }: DataExportProps<T>) {
+export function DataExport<T extends Record<string, unknown>>({ data, columns, filename }: DataExportProps<T>) {
   const [isExporting, setIsExporting] = useState(false);
   
   // Prepare data for CSV export
@@ -47,7 +47,13 @@ export function DataExport<T>({ data, columns, filename }: DataExportProps<T>) {
       autoTable(doc, {
         head: [columns.map(col => col.header)],
         body: data.map(item => 
-          columns.map(col => item[col.accessor])
+          columns.map(col => {
+            const value = item[col.accessor] as unknown;
+            if (value instanceof Date && !isNaN(value.getTime())) {
+              return format(value, "yyyy-MM-dd");
+            }
+            return String(value);
+          })
         ),
         startY: 20,
         styles: {

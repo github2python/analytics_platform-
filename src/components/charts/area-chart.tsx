@@ -11,9 +11,13 @@ import {
     YAxis
 } from "recharts";
 
+interface ChartDataItem {
+    [key: string]: string | number;
+}
+
 interface AreaChartProps {
     title: string;
-    data: any[];
+    data: ChartDataItem[];
     xKey: string;
     yKey: string;
     color?: string;

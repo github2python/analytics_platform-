@@ -7,17 +7,17 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { RiDownload2Line, RiFileExcel2Line, RiFilePdf2Line } from "react-icons/ri";
 
-interface ChartExportProps<T> {
+interface ChartExportProps<T extends Record<string, unknown>> {
   data: T[];
   filename: string;
   title?: string;
 }
 
-export function ChartExport<T>({ data, filename, title }: ChartExportProps<T>) {
+export function ChartExport<T extends Record<string, unknown>>({ data, filename, title }: ChartExportProps<T>) {
   const [isExporting, setIsExporting] = useState(false);
   
   // Prepare headers based on the first data object
-  const csvHeaders = data.length > 0 ? Object.keys(data[0] as object).map(key => ({
+  const csvHeaders = data.length > 0 ? Object.keys(data[0]).map(key => ({
     label: key.charAt(0).toUpperCase() + key.slice(1),
     key
   })) : [];
@@ -34,7 +34,7 @@ export function ChartExport<T>({ data, filename, title }: ChartExportProps<T>) {
       // Generate table data
       const headers = csvHeaders.map(h => h.label);
       const rows = data.map(item => 
-        Object.keys(item as object).map(key => (item as any)[key])
+        Object.keys(item).map(key => item[key])
       );
       
       // Add table

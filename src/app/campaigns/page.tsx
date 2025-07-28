@@ -1,18 +1,19 @@
 "use client";
 
 import { DashboardShell } from "@/components/dashboard-shell";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/data-table/data-table";
 import { columns, Campaign } from "@/components/data-table/columns";
 import { recentCampaigns, campaignPerformance } from "@/lib/data";
-import { RiAddLine, RiUpload2Line, RiFilterLine, RiCalendarLine } from "react-icons/ri";
+
+import { RiAddLine, RiUpload2Line } from "react-icons/ri";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart } from "@/components/charts/bar-chart";
 import { DonutChart } from "@/components/charts/donut-chart";
 import { DateRangePicker } from "@/components/date-range-picker";
 import { useState } from "react";
-import { format, isWithinInterval, parseISO } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 const statusDistribution = [
     { name: "Active", value: 3 },
@@ -39,7 +40,7 @@ export default function CampaignsPage() {
         from: null,
         to: null
     });
-    const [showDateFilter, setShowDateFilter] = useState(false);
+
 
     // Filter campaigns based on status and date range
     const filteredCampaigns = recentCampaigns

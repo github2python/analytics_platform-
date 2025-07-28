@@ -31,7 +31,7 @@ import {
   RiSearch2Line
 } from "react-icons/ri";
 
-interface DataTableProps<TData, TValue> {
+interface DataTableProps<TData extends Record<string, unknown>, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   searchColumn?: string;
@@ -47,7 +47,7 @@ interface DataTableProps<TData, TValue> {
   isLoading?: boolean;
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends Record<string, unknown>, TValue>({
   columns,
   data,
   searchColumn,

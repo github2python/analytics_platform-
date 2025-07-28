@@ -58,6 +58,7 @@ export default function Home() {
   const [conversion, setConversion] = useState(conversionData);
   const [campaigns, setCampaigns] = useState(recentCampaigns);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeTimeframe, setActiveTimeframe] = useState("7days");
 
   // Loading states

@@ -6,13 +6,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { useState, useMemo } from "react";
 import { DateRangePicker } from "@/components/date-range-picker";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { AreaChart } from "@/components/charts/area-chart";
 import { BarChart } from "@/components/charts/bar-chart";
 import { DonutChart } from "@/components/charts/donut-chart";
@@ -24,13 +17,11 @@ import {
 } from "@/lib/data";
 import { 
   RiRefreshLine,
-  RiFilterLine,
   RiFilterOffLine,
 } from "react-icons/ri";
 import { format, parseISO, isAfter, isBefore } from "date-fns";
 
 export default function AnalyticsPage() {
-  const [timeframe, setTimeframe] = useState("7days");
   const [metric, setMetric] = useState("users");
   const [dateRange, setDateRange] = useState<{ from: Date | null; to: Date | null }>({
     from: null,
@@ -52,7 +43,7 @@ export default function AnalyticsPage() {
       }
       return true;
     });
-  }, [dateRange, analyticsOverTime]);
+  }, [dateRange]);
   
   return (
     <DashboardShell>
