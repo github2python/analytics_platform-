@@ -1,5 +1,13 @@
 import { keyMetrics, revenueData, usersData, conversionData, analyticsOverTime } from "@/lib/data";
 
+interface Campaign {
+  status: string;
+  budget: number;
+  spent: number;
+  roi: number;
+  [key: string]: any;
+}
+
 // Generate realistic but random fluctuations to simulate real-time updates
 function generateRandomFluctuation(baseValue: number, percentageRange: number = 5): number {
   const fluctuationPercentage = (Math.random() * percentageRange * 2) - percentageRange;
@@ -52,7 +60,7 @@ export function getUpdatedAnalyticsData() {
 }
 
 // Add a random new campaign or update existing campaign data
-export function getUpdatedCampaignMetrics(campaigns: any[]) {
+export function getUpdatedCampaignMetrics(campaigns: Campaign[]) {
   return campaigns.map(campaign => {
     // Only update active campaigns
     if (campaign.status === "Active") {

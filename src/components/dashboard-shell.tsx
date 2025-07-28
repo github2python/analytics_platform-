@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { MainNav } from "@/components/main-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { RiMenu2Line, RiCloseLine, RiNotification2Line, RiSearch2Line } from "react-icons/ri";
+import { RiMenu2Line, RiNotification2Line, RiSearch2Line } from "react-icons/ri";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
